@@ -137,7 +137,6 @@
     </style>
 </head>
 <body>
-    <button class="back-button" onclick="goBack()">←</button>
     <div class="header">
         <div class="left">
             <img src="logo.png" alt="Logo">
@@ -165,6 +164,8 @@
     <div class="rewards">
         <div>🪙 Coins: <span id="totalCoins">0</span></div>
         <div>💎 Diamonds: <span id="totalDiamonds">0</span></div>
+     <body>
+          <button class="back-button" onclick="goBack()">←</button>
     </div>
 
     <script>
@@ -185,7 +186,7 @@
             const dob = document.getElementById('dob').value;
 
             if (fullName && email && dob) {
-                completeTask('task1', 10, 1);
+                completeTask('task1', 2, 0);
                 document.getElementById('profileForm').style.display = 'none';
             } else {
                 alert('Please fill out all fields.');
