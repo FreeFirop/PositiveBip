@@ -1,118 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colorful Login Form</title>
-    <style>
-        body {
-            background-color: #f0f8ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .login-container {
-            background: linear-gradient(135deg, #f06, #f90, #ff0, #0f0, #0ff, #00f, #90f, #f09);
-            background-size: 200% 200%;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            animation: rainbow 10s ease infinite;
-        }
-
-        @keyframes rainbow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        h2 {
-            color: #fff;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #fff;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background: #fff;
-            color: #333;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #eee;
-        }
-
-        #successMessage {
-            color: #fff;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        :target .hidden {
-            display: block;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input[type="text"], input[type="password"], input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+  </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form action="#successMessage">
-            <div class="input-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login</button>
-        </form>
-        <p id="successMessage" class="hidden">Login successfully!</p>
-    </div>
+  <div class="container">
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="showSuccess()">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <input type="submit" value="Login">
+    </form>
+  </div>
 
-    <script>
-        document.querySelector('form').addEventListener('submit', function(event) {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+  <script>
+    function showSuccess() {
+      // Prevent form submission
+      event.preventDefault();
 
-            // Simple validation (you can replace this with real authentication logic)
-            if (!(email && password)) {
-                event.preventDefault();
-                alert('Please enter both email and password.');
-            }
-        });
-    </script>
+      // Redirect to success page
+      window.location.href = "success.html";
+    }
+  </script>
 </body>
 </html>
-
