@@ -6,12 +6,10 @@
         body {
             background-color: powderblue;
             font-family: Arial, sans-serif;
+            margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
         }
         .header {
             display: flex;
@@ -45,30 +43,114 @@
             font-size: 2em;
         }
         .content {
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
         }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
+        .task {
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+            width: 80%;
+            max-width: 600px;
+        }
+        .task h2 {
+            margin: 0 0 10px;
+        }
+        .task button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .task button:hover {
+            opacity: 0.9;
+        }
+        .task.completed h2 {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .task.completed button {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+        .rewards {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 20px;
+            background-color: white;
+            border-top: 2px solid black;
+        }
+        .rewards div {
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="left">
-            <img src="rishaply-logo.png" alt="Logo">
-            <span>🪙 Coins</span><span>💎 Diamonds</span>
+            <img src="logo.png" alt="Logo">
+            <span>🪙 <span id="coinCount">0</span> Coins</span>
+            <span>💎 <span id="diamondCount">0</span> Diamonds</span>
         </div>
         <div class="title">Rishaply</div>
         <div class="right" onclick="openMenu()">☰</div>
     </div>
     <div class="content">
         <h1>Task Page</h1>
+        <!-- Task 1 -->
+        <div class="task" id="task1">
+            <h2>Task 1: Complete Profile</h2>
+            <button onclick="completeTask('task1', 10, 1)">Complete Task</button>
+        </div>
+        <!-- Task 2 -->
+        <div class="task" id="task2">
+            <h2>Task 2: Verify Email</h2>
+            <button onclick="completeTask('task2', 5, 1)">Complete Task</button>
+        </div>
+        <!-- Task 3 -->
+        <div class="task" id="task3">
+            <h2>Task 3: Invite Friends</h2>
+            <button onclick="completeTask('task3', 20, 5)">Complete Task</button>
+        </div>
+    </div>
+    <div class="rewards">
+        <div>🪙 Coins: <span id="totalCoins">0</span></div>
+        <div>💎 Diamonds: <span id="totalDiamonds">0</span></div>
     </div>
 
     <script>
+        let totalCoins = 0;
+        let totalDiamonds = 0;
+
         function openMenu() {
             alert('Menu clicked!');
+        }
+
+        function completeTask(taskId, coins, diamonds) {
+            const task = document.getElementById(taskId);
+            if (task && !task.classList.contains('completed')) {
+                task.classList.add('completed');
+                const button = task.querySelector('button');
+                button.innerText = 'Task Completed';
+                button.disabled = true;
+
+                // Update rewards
+                totalCoins += coins;
+                totalDiamonds += diamonds;
+
+                document.getElementById('totalCoins').innerText = totalCoins;
+                document.getElementById('totalDiamonds').innerText = totalDiamonds;
+            }
         }
     </script>
 </body>
