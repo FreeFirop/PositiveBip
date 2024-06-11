@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            background-color: powderblue;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: white;
+            border-bottom: 2px solid black;
+        }
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
+        .header .left span {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .header .right {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .header .title {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 2em;
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="left">
+            <span>🪙 Coins</span><span>💎 Diamonds</span>
+        </div>
+        <div class="title">Rishaply</div>
+        <div class="right" onclick="openMenu()">☰</div>
+    </div>
+    <div class="content">
+        <button onclick="goToTaskPage()">Task</button>
+    </div>
+
+    <script>
+        function openMenu() {
+            alert('Menu clicked!');
+        }
+
+        function goToTaskPage() {
+            alert('Task button clicked! Redirect to the task page.');
+            // window.location.href = 'task.html'; // Uncomment this line and create the task.html page for actual redirection
+        }
+    </script>
+</body>
+</html>
