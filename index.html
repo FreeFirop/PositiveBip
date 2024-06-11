@@ -3,159 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Login</title>
+    <title>Colorful Login Form</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
+            background-color: #f0f8ff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .container {
-            display: none;
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
 
         .login-container {
-            display: flex;
-            flex-direction: column;
-            background: white;
-            padding: 2em;
+            background: linear-gradient(135deg, #f06, #f90, #ff0, #0f0, #0ff, #00f, #90f, #f09);
+            background-size: 200% 200%;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: rainbow 10s ease infinite;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h2 {
+            color: #fff;
             text-align: center;
+            margin-bottom: 20px;
         }
 
-        .login-container h1 {
-            margin-bottom: 1em;
+        .input-group {
+            margin-bottom: 15px;
         }
 
-        .login-container form {
-            display: flex;
-            flex-direction: column;
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
         }
 
-        .login-container label {
-            margin-bottom: 0.5em;
-            text-align: left;
-        }
-
-        .login-container input {
-            margin-bottom: 1em;
-            padding: 0.5em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .login-container button {
-            padding: 0.5em;
+        input {
+            width: 100%;
+            padding: 10px;
             border: none;
             border-radius: 5px;
-            background: #007BFF;
-            color: white;
-            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #fff;
+            color: #333;
+            font-size: 16px;
             cursor: pointer;
         }
 
-        .login-container button:hover {
-            background: #0056b3;
+        button:hover {
+            background: #eee;
         }
 
-        .dashboard-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        #successMessage {
+            color: #fff;
             text-align: center;
-            width: 100%;
-            height: 100vh;
-            background: url('rishaply-logo.png') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
+            margin-top: 20px;
         }
 
-        .dashboard-container header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1em;
-            background: rgba(0, 0, 0, 0.5);
+        .hidden {
+            display: none;
         }
 
-        .dashboard-container .logo {
-            height: 50px;
-        }
-
-        .dashboard-container .balance {
-            display: flex;
-            align-items: center;
-        }
-
-        .dashboard-container .balance span {
-            margin-left: 1em;
-            font-size: 1.5em;
-        }
-
-        /* Initially show the login container */
-        .login-container {
-            display: flex;
+        :target .hidden {
+            display: block;
         }
     </style>
 </head>
 <body>
-    <div class="container login-container">
-        <h1>Login</h1>
-        <form onsubmit="return showDashboard(event)">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="#successMessage">
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
             <button type="submit">Login</button>
         </form>
-    </div>
-
-    <div class="container dashboard-container">
-        <header>
-            <img src="rishaply-logo.png" alt="Rishaply Logo" class="logo">
-            <div class="balance">
-                <span class="coin">🪙 100</span>
-                <span class="money">💰 $200</span>
-            </div>
-        </header>
-        <main>
-            <h1>Welcome to xReward</h1>
-            <p>Start earning rewards now!</p>
-        </main>
+        <p id="successMessage" class="hidden">Login successfully!</p>
     </div>
 
     <script>
-        function showDashboard(event) {
-            event.preventDefault();
-            document.querySelector('.login-container').style.display = 'none';
-            document.querySelector('.dashboard-container').style.display = 'flex';
-        }
+        document.querySelector('form').addEventListener('submit', function(event) {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Simple validation (you can replace this with real authentication logic)
+            if (!(email && password)) {
+                event.preventDefault();
+                alert('Please enter both email and password.');
+            }
+        });
     </script>
 </body>
 </html>
+
