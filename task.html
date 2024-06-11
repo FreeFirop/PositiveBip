@@ -93,6 +93,36 @@
         .rewards div {
             font-size: 24px;
         }
+        .profile-form {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+            width: 80%;
+            max-width: 600px;
+        }
+        .profile-form input {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+        .profile-form button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .profile-form button:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
@@ -110,18 +140,15 @@
         <!-- Task 1 -->
         <div class="task" id="task1">
             <h2>Task 1: Complete Profile</h2>
-            <button onclick="completeTask('task1', 10, 1)">Complete Task</button>
+            <button onclick="showProfileForm()">Complete Profile</button>
         </div>
-        <!-- Task 2 -->
-        <div class="task" id="task2">
-            <h2>Task 2: Verify Email</h2>
-            <button onclick="completeTask('task2', 5, 1)">Complete Task</button>
-        </div>
-        <!-- Task 3 -->
-        <div class="task" id="task3">
-            <h2>Task 3: Invite Friends</h2>
-            <button onclick="completeTask('task3', 20, 5)">Complete Task</button>
-        </div>
+    </div>
+    <div class="profile-form" id="profileForm">
+        <h2>Complete Your Profile</h2>
+        <input type="text" id="fullName" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="date" id="dob" placeholder="Date of Birth" required>
+        <button onclick="submitProfile()">Submit Profile</button>
     </div>
     <div class="rewards">
         <div>🪙 Coins: <span id="totalCoins">0</span></div>
@@ -134,6 +161,23 @@
 
         function openMenu() {
             alert('Menu clicked!');
+        }
+
+        function showProfileForm() {
+            document.getElementById('profileForm').style.display = 'flex';
+        }
+
+        function submitProfile() {
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const dob = document.getElementById('dob').value;
+
+            if (fullName && email && dob) {
+                completeTask('task1', 10, 1);
+                document.getElementById('profileForm').style.display = 'none';
+            } else {
+                alert('Please fill out all fields.');
+            }
         }
 
         function completeTask(taskId, coins, diamonds) {
