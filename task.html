@@ -19,6 +19,7 @@
             padding: 10px;
             background-color: white;
             border-bottom: 2px solid black;
+            position: relative;
         }
         .header .left {
             display: flex;
@@ -123,9 +124,20 @@
         .profile-form button:hover {
             opacity: 0.9;
         }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: black;
+        }
     </style>
 </head>
 <body>
+    <button class="back-button" onclick="goBack()">←</button>
     <div class="header">
         <div class="left">
             <img src="logo.png" alt="Logo">
@@ -192,9 +204,19 @@
                 totalCoins += coins;
                 totalDiamonds += diamonds;
 
-                document.getElementById('totalCoins').innerText = totalCoins;
-                document.getElementById('totalDiamonds').innerText = totalDiamonds;
+                updateRewards();
             }
+        }
+
+        function updateRewards() {
+            document.getElementById('coinCount').innerText = totalCoins;
+            document.getElementById('diamondCount').innerText = totalDiamonds;
+            document.getElementById('totalCoins').innerText = totalCoins;
+            document.getElementById('totalDiamonds').innerText = totalDiamonds;
+        }
+
+        function goBack() {
+            window.history.back();
         }
     </script>
 </body>
