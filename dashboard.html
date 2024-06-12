@@ -7,22 +7,23 @@
             background-color: powderblue;
             font-family: Arial, sans-serif;
             margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
             padding: 10px;
             background-color: white;
             border-bottom: 2px solid black;
+            position: relative;
         }
         .header .left {
             display: flex;
             align-items: center;
-        }
-        .header .left img {
-            height: 40px;
-            margin-right: 10px;
         }
         .header .left span {
             font-size: 24px;
@@ -40,45 +41,55 @@
         }
         .content {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 80vh;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
         }
-        .content button {
-            font-size: 16px;
-            padding: 10px;
-            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .rewards {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 20px;
+            background-color: white;
+            border-top: 2px solid black;
         }
-        .content button:hover {
-            opacity: 0.9;
+        .rewards div {
+            font-size: 24px;
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (!localStorage.getItem('authToken')) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Fetch user progress from localStorage
+            const userProgress = JSON.parse(localStorage.getItem('userProgress')) || { coins: 0, diamonds: 0 };
+
+            // Display user progress
+            document.getElementById('coinCount').innerText = userProgress.coins;
+            document.getElementById('diamondCount').innerText = userProgress.diamonds;
+        });
+
+        function openMenu() {
+            alert('Menu clicked!');
+        }
+    </script>
 </head>
 <body>
     <div class="header">
         <div class="left">
-            <img src="rishaply-logo.png" alt="profile">
-            <span>🪙 0</span><span>💎 0</span>
+            <span id="coinCount">0</span> 🪙
+            <span id="diamondCount">0</span> 💎
         </div>
         <div class="title">Rishaply</div>
         <div class="right" onclick="openMenu()">☰</div>
     </div>
     <div class="content">
-        <button onclick="goToTaskPage()">Task</button>
+        <h1>Welcome to the Dashboard</h1>
     </div>
-
-    <script>
-        function openMenu() {
-            alert('Logout ↪️');
-        }
-
-        function goToTaskPage() {
-            window.location.href = 'task.html'; // Redirect to task page
-        }
-    </script>
 </body>
 </html>
