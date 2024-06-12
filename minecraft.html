@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Hosting</title>
+    <style>
+        body {
+            background-color: #2c3e50;
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #34495e;
+        }
+        .header .title {
+            font-size: 1.5em;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .header .user-info {
+            font-size: 1em;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .section {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #34495e;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .section h2 {
+            margin-top: 0;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .section button {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .section button:hover {
+            background: linear-gradient(90deg, #0072ff, #00c6ff);
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (!localStorage.getItem('authToken')) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            document.getElementById('userEmail').innerText = localStorage.getItem('userEmail');
+        });
+
+        function createServer() {
+            alert('Server created successfully!');
+            // Add server creation logic here
+        }
+
+        function accessConsole() {
+            alert('Accessing server console...');
+            // Add console access logic here
+        }
+
+        function managePlugins() {
+            alert('Managing plugins...');
+            // Add plugin management logic here
+        }
+
+        function accessFiles() {
+            alert('Accessing files...');
+            // Add file access logic here
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="title">Minecraft Server Hosting</div>
+        <div class="user-info">Logged in as: <span id="userEmail"></span></div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <h2>Create Server</h2>
+            <button onclick="createServer()">Create Server</button>
+        </div>
+        <div class="section">
+            <h2>Server Console</h2>
+            <button onclick="accessConsole()">Access Console</button>
+        </div>
+        <div class="section">
+            <h2>Manage Plugins</h2>
+            <button onclick="managePlugins()">Manage Plugins</button>
+        </div>
+        <div class="section">
+            <h2>Access Files</h2>
+            <button onclick="accessFiles()">Access Files</button>
+        </div>
+    </div>
+</body>
+</html>
