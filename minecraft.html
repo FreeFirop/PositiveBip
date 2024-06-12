@@ -49,9 +49,10 @@
             -webkit-background-clip: text;
             color: transparent;
         }
-        .section button {
+        .section button, .section input, .section select {
             width: 100%;
             padding: 10px;
+            margin: 5px 0;
             background: linear-gradient(90deg, #00c6ff, #0072ff);
             border: none;
             border-radius: 5px;
@@ -59,7 +60,7 @@
             font-size: 1em;
             cursor: pointer;
         }
-        .section button:hover {
+        .section button:hover, .section input:hover, .section select:hover {
             background: linear-gradient(90deg, #0072ff, #00c6ff);
         }
     </style>
@@ -72,26 +73,6 @@
 
             document.getElementById('userEmail').innerText = localStorage.getItem('userEmail');
         });
-
-        function createServer() {
-            alert('Server created successfully!');
-            // Add server creation logic here
-        }
-
-        function accessConsole() {
-            alert('Accessing server console...');
-            // Add console access logic here
-        }
-
-        function managePlugins() {
-            alert('Managing plugins...');
-            // Add plugin management logic here
-        }
-
-        function accessFiles() {
-            alert('Accessing files...');
-            // Add file access logic here
-        }
     </script>
 </head>
 <body>
@@ -102,20 +83,31 @@
     <div class="container">
         <div class="section">
             <h2>Create Server</h2>
-            <button onclick="createServer()">Create Server</button>
+            <form id="createServerForm">
+                <input type="text" id="serverName" placeholder="Server Name" required>
+                <select id="cpu" required>
+                    <option value="" disabled selected>Select CPU</option>
+                    <option value="1">1 CPU</option>
+                    <option value="2">2 CPUs</option>
+                    <option value="4">4 CPUs</option>
+                    <option value="8">8 CPUs</option>
+                </select>
+                <select id="software" required>
+                    <option value="" disabled selected>Select Software</option>
+                    <option value="vanilla">Vanilla</option>
+                    <option value="spigot">Spigot</option>
+                    <option value="bukkit">Bukkit</option>
+                    <option value="paper">Paper</option>
+                </select>
+                <input type="text" id="nodes" placeholder="Nodes (comma separated)" required>
+                <button type="button" onclick="createServer()">Create Server</button>
+            </form>
         </div>
         <div class="section">
             <h2>Server Console</h2>
-            <button onclick="accessConsole()">Access Console</button>
-        </div>
-        <div class="section">
-            <h2>Manage Plugins</h2>
-            <button onclick="managePlugins()">Manage Plugins</button>
-        </div>
-        <div class="section">
-            <h2>Access Files</h2>
-            <button onclick="accessFiles()">Access Files</button>
+            <button onclick="startServer()">Access Console</button>
         </div>
     </div>
+    <script src="server-management.js"></script>
 </body>
 </html>
