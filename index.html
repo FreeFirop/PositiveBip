@@ -1,111 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Login Page</title>
     <style>
         body {
-            background-color: powderblue;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
             font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
         }
         .login-container {
-            background-color: white;
+            background: white;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        .login-container h2 {
-            margin-bottom: 20px;
+        .login-container h1 {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 2em;
         }
-        .login-container input {
+        .login-container input[type="email"],
+        .login-container input[type="password"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
-            border-radius: 5px;
             border: 1px solid #ccc;
+            border-radius: 5px;
         }
         .login-container button {
             width: 100%;
             padding: 10px;
-            background-color: green;
-            color: white;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
             border: none;
             border-radius: 5px;
+            color: white;
+            font-size: 1em;
             cursor: pointer;
-            margin-top: 10px;
         }
         .login-container button:hover {
-            opacity: 0.9;
-        }
-        .google-signup {
-            margin-top: 20px;
+            background: linear-gradient(90deg, #0072ff, #00c6ff);
         }
     </style>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
-        function handleCredentialResponse(response) {
-            console.log("Encoded JWT ID token: " + response.credential);
-            // Save the token and user info in local storage
-            localStorage.setItem('authToken', response.credential);
-            // Decode JWT to get user email (requires a library or your server to decode)
-            const payload = JSON.parse(atob(response.credential.split('.')[1]));
-            localStorage.setItem('userEmail', payload.email);
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-            // Redirect to task page
-            window.location.href = "task.html";
-        }
-
-        window.onload = function () {
-            google.accounts.id.initialize({
-                client_id: "YOUR_GOOGLE_CLIENT_ID",
-                callback: handleCredentialResponse
-            });
-            google.accounts.id.renderButton(
-                document.getElementById("google-signup"),
-                { theme: "outline", size: "large" }  // customization attributes
-            );
-            google.accounts.id.prompt();  // display the One Tap dialog
-
-            // Check if user is already logged in
-            if (localStorage.getItem('authToken')) {
-                window.location.href = "task.html";
+            if (email && password) {
+                localStorage.setItem('authToken', 'dummyAuthToken'); // Mock token for demonstration
+                localStorage.setItem('userEmail', email);
+                window.location.href = 'minecraft.html';
+            } else {
+                alert('Please fill in both fields.');
             }
         }
     </script>
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
-        <form onsubmit="loginUser(event)">
-            <input type="email" name="email" id="email" placeholder="Email" required>
-            <input type="password" name="password" id="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <div id="google-signup" class="google-signup"></div>
+        <h1>Login</h1>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
     </div>
-    <script>
-        function loginUser(event) {
-            event.preventDefault();
-            // Here, you would normally validate the email and password against your server
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            // Assuming validation is successful, save email in local storage
-            localStorage.setItem('userEmail', email);
-            localStorage.setItem('authToken', 'someAuthToken');  // Replace with real token
-
-            // Redirect to task page
-            window.location.href = 'task.html';
-        }
-    </script>
-</body>
-</html>
 </body>
 </html>
