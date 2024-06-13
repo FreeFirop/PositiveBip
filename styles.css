@@ -13,15 +13,21 @@ body {
 .welcome-container {
     text-align: center;
     color: #fff;
-    background-image: url('../images/pb-logo.png'); /* Adjust path if necessary */
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain; /* Adjust as needed */
+    background: linear-gradient(135deg, #ff0000, #ff9900, #ffff00, #33cc33, #00ccff, #9933ff, #ff33cc);
+    background-size: 400% 400%;
+    animation: rainbow 15s ease infinite;
+    position: relative;
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@keyframes rainbow {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
 }
 
 .welcome-container h1 {
@@ -30,4 +36,19 @@ body {
     background-color: rgba(0, 0, 0, 0.5); /* Add background color to improve text readability */
     padding: 1rem;
     border-radius: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.welcome-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../images/pb-logo.png') no-repeat center center;
+    background-size: 50%; /* Adjust size as needed */
+    opacity: 0.2; /* Adjust opacity as needed */
+    z-index: 0;
 }
