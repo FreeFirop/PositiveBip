@@ -94,18 +94,35 @@
         <img class="scanner-image" src="whatsapp-qr-code.png" alt="WhatsApp QR Code">
     </div>
 
-    <script>
-        document.getElementById('nextButton').addEventListener('click', function() {
-            document.getElementById('landingPage').style.display = 'none';
-            document.getElementById('formPage').style.display = 'block';
-            document.getElementById('scannerContainer').style.display = 'block';
-        });
+<script>
+    document.getElementById('nextButton').addEventListener('click', function() {
+        document.getElementById('landingPage').style.display = 'none';
+        document.getElementById('formPage').style.display = 'block';
+        document.getElementById('qrScannerContainer').style.display = 'block';
 
-        document.getElementById('paymentForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Simulate a successful transfer
-            alert('Successfully transferred ₹5000');
-        });
-    </script>
-</body>
-</html>
+        const qrCodeScanner = new Html5Qrcode('qrVideo');
+
+        qrCodeScanner.start(
+            { facingMode: "environment" }, // Use the rear camera for better scanning
+            {
+                fps: 10,    // Frames per second
+                qrbox: 250  // Size of QR scanning box
+            },
+            qrCodeData => {
+                // QR code scanned successfully
+                alert(`Successfully scanned: ${qrCodeData}`);
+            },
+            errorMessage => {
+                // Handle errors
+                console.error(errorMessage);
+            }
+        );
+    });
+
+    document.getElementById('paymentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Simulate a successful transfer
+        alert('Successfully transferred ₹5000');
+    });
+</script>
+
