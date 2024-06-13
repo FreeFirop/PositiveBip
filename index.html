@@ -69,9 +69,10 @@
             text-align: center;
         }
 
-        .scanner-image {
-            max-width: 200px;
-            height: auto;
+        #reader {
+            width: 300px;
+            height: 300px;
+            margin: auto;
         }
     </style>
 </head>
@@ -91,38 +92,49 @@
     </div>
 
     <div id="scannerContainer" class="scanner-container">
-        <img class="scanner-image" src="whatsapp-qr-code.png" alt="WhatsApp QR Code">
+        <h2>Scan WhatsApp QR Code</h2>
+        <div id="reader"></div>
     </div>
 
-<script>
-    document.getElementById('nextButton').addEventListener('click', function() {
-        document.getElementById('landingPage').style.display = 'none';
-        document.getElementById('formPage').style.display = 'block';
-        document.getElementById('qrScannerContainer').style.display = 'block';
+    <!-- Include the html5-qrcode library -->
+    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
 
-        const qrCodeScanner = new Html5Qrcode('qrVideo');
+    <script>
+        document.getElementById('nextButton').addEventListener('click', function() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('formPage').style.display = 'block';
+            document.getElementById('scannerContainer').style.display = 'block';
 
-        qrCodeScanner.start(
-            { facingMode: "environment" }, // Use the rear camera for better scanning
-            {
-                fps: 10,    // Frames per second
-                qrbox: 250  // Size of QR scanning box
-            },
-            qrCodeData => {
-                // QR code scanned successfully
-                alert(`Successfully scanned: ${qrCodeData}`);
-            },
-            errorMessage => {
-                // Handle errors
-                console.error(errorMessage);
-            }
-        );
-    });
+            const html5QrCode = new Html5Qrcode("reader");
 
-    document.getElementById('paymentForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        // Simulate a successful transfer
-        alert('Successfully transferred ₹5000');
-    });
-</script>
+            html5QrCode.start(
+                { facingMode: "environment" }, // Use rear camera
+                {
+                    fps: 10, // Optional, frames per second for the scan
+                    qrbox: 250 // Optional, scanning box size (can be adjusted)
+                },
+                qrCodeMessage => {
+                    // Do something with the scanned code
+                    alert(`Successfully scanned: ${qrCodeMessage}`);
+                    html5QrCode.stop().then(() => {
+                        console.log("QR Code scanning stopped.");
+                    }).catch(err => {
+                        console.error("Failed to stop scanning.");
+                    });
+                },
+                errorMessage => {
+                    // parse error, ignore it.
+                }
+            ).catch(err => {
+                console.error("Unable to start scanning.", err);
+            });
+        });
 
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Simulate a successful transfer
+            alert('Successfully transferred ₹5000');
+        });
+    </script>
+</body>
+</html>
