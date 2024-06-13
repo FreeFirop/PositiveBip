@@ -4,10 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Login Page Styles */
+        .login-container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-container h1 {
+            margin-bottom: 1rem;
+            color: #ff7e5f;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-container button {
+            padding: 0.5rem 1rem;
+            background-color: #ff7e5f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: #feb47b;
+        }
+
+        /* Welcome Page Styles */
+        .welcome-container {
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(135deg, #ff0000, #ff9900, #ffff00, #33cc33, #00ccff, #9933ff, #ff33cc);
+            background-size: 400% 400%;
+            animation: rainbow 15s ease infinite;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        @keyframes rainbow {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        .welcome-container h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #ff0000, #ff9900, #ffff00, #33cc33, #00ccff, #9933ff, #ff33cc);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 15s ease infinite;
+            padding: 1rem;
+            border-radius: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('path/to/your/logo.png') no-repeat center center;
+            background-size: 50%;
+            opacity: 0.2;
+            z-index: 0;
+        }
+    </style>
 </head>
 <body>
-    <div class="login-container">
+    <div id="login-page" class="login-container">
         <h1>Login</h1>
         <form id="login-form">
             <input type="text" id="username" placeholder="Username" required>
@@ -15,10 +111,14 @@
             <button type="submit">Login</button>
         </form>
     </div>
+    <div id="welcome-page" class="welcome-container" style="display: none;">
+        <h1>WELCOME TO POSITIVEBIP WEBSITE</h1>
+    </div>
     <script>
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault();
-            window.location.href = 'welcome.html';
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('welcome-page').style.display = 'flex';
         });
     </script>
 </body>
