@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #70c5ce;
+        }
+        canvas {
+            border: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="320" height="480"></canvas>
+    <script>
+        // Simple Flappy Bird implementation
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+
+        // Load images
+        const bird = new Image();
+        const bg = new Image();
+        const fg = new Image();
+        const pipeNorth = new Image();
+        const pipeSouth = new Image();
+
+        bird.src = 'https://link-to-bird-image.png';
+        bg.src = 'https://link-to-bg-image.png';
+        fg.src = 'https://link-to-fg-image.png';
+        pipeNorth.src = 'https://link-to-pipeNorth-image.png';
+        pipeSouth.src = 'https://link-to-pipeSouth-image.png';
+
+        const gap = 85;
+        const constant = pipeNorth.height + gap;
+
+        let bX = 10;
+        let bY = 150;
+        const gravity = 1.5;
+
+        document.addEventListener('keydown', moveUp);
+
+        function moveUp() {
+            bY -= 25;
+        }
+
+        const pipe = [];
+
+        pipe[0] = {
+            x: canvas.width,
+            y: 0
+        };
+
+        function draw() {
+            context.drawImage(bg, 0, 0);
+
+            for (let i = 0; i < pipe.length; i++) {
+                context.drawImage(pipeNorth, pipe[i].x, pipe[i].y);
+                context.drawImage(pipeSouth, pipe[i].x, pipe[i].y + constant);
+
+                pipe[i].x--;
+
+                if (pipe[i].x == 125) {
+                    pipe.push({
+                        x: canvas.width,
+                        y: Math.floor(Math.random() * pipeNorth.height) - pipeNorth.height
+                    });
+                }
+
+                if (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeNorth.width && (bY <= pipe[i].y + pipeNorth.height || bY + bird.height >= pipe[i].y + constant) || bY + bird.height >= canvas.height - fg.height) {
+                    location.reload(); // reload the page
+                }
+
+                if (pipe[i].x == 5) {
+                    score++;
+                }
+            }
+
+            context.drawImage(fg, 0, canvas.height - fg.height);
+
+            context.drawImage(bird, bX, bY);
+
+            bY += gravity;
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    </script>
+</body>
+</html>
