@@ -79,6 +79,24 @@
             0% {transform: translateX(100%);}
             100% {transform: translateX(-100%);}
         }
+        .play-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .play-button::before {
+            content: '▶';
+            color: white;
+            font-size: 24px;
+        }
     </style>
     <script>
         function showWelcomePage(event) {
@@ -86,7 +104,18 @@
             document.getElementById('registration-form').classList.add('hidden');
             document.getElementById('welcome-header').classList.remove('hidden');
             document.getElementById('welcome-page').classList.remove('hidden');
+            document.getElementById('game-page').classList.add('hidden');
         }
+
+        function showGamePage() {
+            document.getElementById('welcome-page').classList.add('hidden');
+            document.getElementById('game-page').classList.remove('hidden');
+            document.getElementById('registration-form').classList.add('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('.play-button').addEventListener('click', showGamePage);
+        });
     </script>
 </head>
 <body>
@@ -106,6 +135,7 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <input type="submit" value="Register">
+            <div class="play-button"></div>
         </form>
     </div>
 
@@ -114,7 +144,11 @@
     </div>
 
     <div id="welcome-page" class="container hidden">
-        <!-- Play button will be added here -->
+        <!-- No content here -->
+    </div>
+
+    <div id="game-page" class="game-container hidden">
+        <iframe src="https://flappybird.io/" width="320" height="480" class="game-iframe"></iframe>
     </div>
 </body>
 </html>
