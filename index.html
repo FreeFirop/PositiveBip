@@ -61,18 +61,62 @@
         .hidden {
             display: none;
         }
+        .welcome-header {
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: slide 5s infinite;
+        }
+        @keyframes slide {
+            0% {transform: translateX(100%);}
+            100% {transform: translateX(-100%);}
+        }
+        .play-button {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+            color: white;
+        }
     </style>
     <script>
-        function redirectToGamePage(event) {
+        function showWelcomePage(event) {
             event.preventDefault();
-            window.location.href = "game.html";
+            document.getElementById('registration-form').classList.add('hidden');
+            document.getElementById('welcome-header').classList.remove('hidden');
+            document.getElementById('welcome-page').classList.remove('hidden');
+            document.getElementById('game-page').classList.add('hidden');
         }
+
+        function showGamePage() {
+            document.getElementById('welcome-page').classList.add('hidden');
+            document.getElementById('game-page').classList.remove('hidden');
+            document.getElementById('registration-form').classList.add('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('.play-button').addEventListener('click', showGamePage);
+        });
     </script>
 </head>
 <body>
-    <div class="container">
+    <div id="registration-form" class="container">
         <h1>Register</h1>
-        <form onsubmit="redirectToGamePage(event)">
+        <form onsubmit="showWelcomePage(event)">
             <div class="form-control">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
@@ -87,6 +131,19 @@
             </div>
             <input type="submit" value="Register">
         </form>
+        <div class="play-button" onclick="showGamePage()">Play</div>
+    </div>
+
+    <div id="welcome-header" class="welcome-header hidden">
+        Welcome to PositiveBip
+    </div>
+
+    <div id="welcome-page" class="container hidden">
+        <div class="play-button" onclick="showGamePage()">Play</div>
+    </div>
+
+    <div id="game-page" class="game-container hidden">
+        <iframe src="https://flappybird.io/" width="320" height="480"></iframe>
     </div>
 </body>
 </html>
