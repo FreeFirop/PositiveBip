@@ -94,29 +94,17 @@
         }
     </style>
     <script>
-        function showWelcomePage(event) {
-            event.preventDefault();
-            document.getElementById('registration-form').classList.add('hidden');
-            document.getElementById('welcome-header').classList.remove('hidden');
-            document.getElementById('welcome-page').classList.remove('hidden');
-            document.getElementById('game-page').classList.add('hidden');
-        }
-
         function showGamePage() {
             document.getElementById('welcome-page').classList.add('hidden');
             document.getElementById('game-page').classList.remove('hidden');
             document.getElementById('registration-form').classList.add('hidden');
         }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelector('.play-button').addEventListener('click', showGamePage);
-        });
     </script>
 </head>
 <body>
     <div id="registration-form" class="container">
         <h1>Register</h1>
-        <form onsubmit="showWelcomePage(event)">
+        <form onsubmit="showGamePage()">
             <div class="form-control">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>
@@ -139,7 +127,7 @@
     </div>
 
     <div id="welcome-page" class="container hidden">
-        <div class="play-button" onclick="showGamePage(play)">Play</div>
+        <div class="play-button" onclick="showGamePage()">Play</div>
     </div>
 
     <div id="game-page" class="game-container hidden">
