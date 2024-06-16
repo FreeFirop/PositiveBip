@@ -3,139 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rainbow Registration Form</title>
-    <style>
-        body {
-            background-color: yellow;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            position: relative;
-            background-color: transparent;
-            box-shadow: none;
-        }
-        h1 {
-            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        .form-control {
-            margin: 10px 0;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[type="submit"] {
-            background-color: blue;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-        input[type="submit"]:hover {
-            background-color: darkblue;
-        }
-        .hidden {
-            display: none;
-        }
-        .welcome-header {
-            width: 100%;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 24px;
-            font-weight: bold;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: slide 5s infinite;
-        }
-        @keyframes slide {
-            0% {transform: translateX(100%);}
-            100% {transform: translateX(-100%);}
-        }
-        .play-button {
-            width: 50px;
-            height: 50px;
-            background-color: red;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-            font-weight: bold;
-            color: white;
-        }
-        .game-container {
-            width: 320px;
-            height: 480px;
-        }
-    </style>
-    <script>
-        function showGamePage() {
-            document.getElementById('welcome-page').classList.add('hidden');
-            document.getElementById('game-page').classList.remove('hidden');
-            document.getElementById('registration-form').classList.add('hidden');
-        }
-    </script>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="registration-form" class="container">
-        <h1>Register</h1>
-        <form onsubmit="showGamePage()">
-            <div class="form-control">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-control">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-control">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <input type="submit" value="Register">
-        </form>
-        <div class="play-button" onclick="showGamePage()">Play</div>
-    </div>
-
-    <div id="welcome-header" class="welcome-header hidden">
-        Welcome to PositiveBip
-    </div>
-
-    <div id="welcome-page" class="container hidden">
-        <div class="play-button" onclick="showGamePage()">Play</div>
-    </div>
-
-    <div id="game-page" class="game-container hidden">
-        <iframe src="https://flappybird.io/" width="320" height="480"></iframe>
-    </div>
+    <h1>Login</h1>
+    <form id="login-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+        <label for="mobile">Mobile Number:</label>
+        <input type="text" id="mobile" name="mobile" required><br>
+        <button type="submit">Login</button>
+    </form>
+    <script src="main.js"></script>
 </body>
 </html>
