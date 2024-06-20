@@ -11,10 +11,12 @@
             background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF);
             color: blue;
             text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
-            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -23,34 +25,76 @@
             color: white;
         }
 
-        .header-left,
-        .header-center,
-        .header-right {
+        .header-left {
             flex: 1;
+            text-align: left;
         }
 
         .header-center {
+            flex: 2;
             text-align: center;
         }
 
         .header-right {
+            flex: 1;
             text-align: right;
         }
 
+        .header-right img {
+            cursor: pointer;
+        }
+
         main {
-            margin-top: 20%;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         footer {
-            width: 100%;
             display: flex;
             justify-content: flex-start;
             align-items: center;
             padding: 10px 20px;
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
+        }
+
+        .dialog {
+            display: none;
             position: fixed;
-            bottom: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            z-index: 1000;
+        }
+
+        .dialog-content {
+            text-align: left;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            float: right;
+            font-size: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: blue;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -59,7 +103,7 @@
         <div class="header-left">Rishaply</div>
         <div class="header-center" id="welcome-message">Welcome to PositiveBip</div>
         <div class="header-right">
-            <img src="globe-icon.png" alt="Language Selector" id="language-icon" style="cursor: pointer;">
+            <img src="globe-icon.png" alt="Language Selector" id="language-icon">
         </div>
     </header>
     <main>
@@ -67,9 +111,9 @@
     </main>
     <footer></footer>
 
-    <div id="language-dialog" class="dialog" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ddd;">
+    <div id="language-dialog" class="dialog">
         <div class="dialog-content">
-            <span class="close-btn" id="close-btn" style="cursor: pointer;">&times;</span>
+            <span class="close-btn" id="close-btn">&times;</span>
             <h2>Select Language</h2>
             <ul>
                 <li><a href="#" data-lang="en">English</a></li>
