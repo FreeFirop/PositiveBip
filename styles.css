@@ -1,6 +1,8 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: powderblue;
+    color: #000;
 }
 
 header {
@@ -10,6 +12,10 @@ header {
     padding: 10px 20px;
     background-color: #f8f8f8;
     border-bottom: 1px solid #ddd;
+    color: transparent; /* This hides the original color */
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
 .header-left,
@@ -50,6 +56,11 @@ header {
     padding: 20px;
     border-radius: 5px;
     text-align: center;
+    position: relative;
+    color: transparent; /* This hides the original color */
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
 .close-btn {
