@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Rishaply</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid #ddd;
+            position: fixed;
+            top: 0;
+            color: white;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-left img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .content {
+            margin-top: 100px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+        }
+
+        .footer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid #ddd;
+            position: fixed;
+            bottom: 0;
+            color: white;
+        }
+
+        .g-signin2 {
+            width: 200px;
+        }
+    </style>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="125738918519-tsf5ou52gkjufdlnos54vltf2lujs68e.apps.googleusercontent.com">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <img src="rishaply-icon.png" alt="Rishaply Icon">
+            <span>RISHAPLY</span>
+        </div>
+    </header>
+
+    <main class="content">
+        <h1>LOGIN</h1>
+        <form>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </main>
+
+    <footer class="footer">
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    </footer>
+
+    <script>
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId());
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail());
+
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log('ID Token: ' + id_token);
+
+            // Send the ID token to your backend for verification and login
+            fetch('/tokensignin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idtoken: id_token })
+            }).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                console.log(data);
+                // Handle the response from the server
+                if (data.success) {
+                    window.location.href = '/dashboard'; // Redirect to dashboard or another page
+                } else {
+                    alert('Sign-in failed');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
