@@ -93,7 +93,7 @@
     </header>
 
     <main class="content">
-        <h1 id="login-title">LOGIN</h1>
+        <h1>LOGIN</h1>
         <form>
             <input type="email" placeholder="Email" required>
             <input type="password" placeholder="Password" required>
@@ -104,27 +104,5 @@
     <footer class="footer">
         <p>Sign up with Google to continue</p>
     </footer>
-
-    <script>
-        function loadLanguage(lang) {
-            var messages = {
-                en: { login: 'LOGIN' },
-                es: { login: 'INICIAR SESIÓN' },
-                fr: { login: 'CONNEXION' }
-                // Add more translations as needed
-            };
-
-            if (messages[lang]) {
-                document.getElementById('login-title').textContent = messages[lang].login;
-            } else {
-                document.getElementById('login-title').textContent = messages['en'].login;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
-            loadLanguage(selectedLanguage);
-        });
-    </script>
 </body>
 </html>
