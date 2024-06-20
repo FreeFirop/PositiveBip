@@ -105,42 +105,6 @@
             <input type="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
-    </main>
-
-    <footer class="footer">
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    </footer>
-
-    <script>
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId());
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail());
-
-            var id_token = googleUser.getAuthResponse().id_token;
-            console.log('ID Token: ' + id_token);
-
-            // Send the ID token to your backend for verification and login
-            fetch('/tokensignin', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ idtoken: id_token })
-            }).then(function(response) {
-                return response.json();
-            }).then(function(data) {
-                console.log(data);
-                // Handle the response from the server
-                if (data.success) {
-                    window.location.href = '/dashboard'; // Redirect to dashboard or another page
-                } else {
-                    alert('Sign-in failed');
-                }
-            });
-        }
     </script>
 </body>
 </html>
