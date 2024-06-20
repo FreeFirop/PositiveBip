@@ -31,7 +31,7 @@
         }
 
         .header-center {
-            flex: 2;
+            flex: 1;
             text-align: center;
         }
 
@@ -47,6 +47,7 @@
         main {
             flex: 1;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -116,9 +117,9 @@
             <span class="close-btn" id="close-btn">&times;</span>
             <h2>Select Language</h2>
             <ul>
-                <li><a href="#" data-lang="en">English</a></li>
-                <li><a href="#" data-lang="es">Spanish</a></li>
-                <li><a href="#" data-lang="fr">French</a></li>
+                <li><a href="#">English</a></li>
+                <li><a href="#">Spanish</a></li>
+                <li><a href="#">French</a></li>
                 <!-- Add more languages as needed -->
             </ul>
         </div>
@@ -133,38 +134,8 @@
             document.getElementById('language-dialog').style.display = 'none';
         });
 
-        document.querySelectorAll('#language-dialog a').forEach(function(element) {
-            element.addEventListener('click', function(event) {
-                event.preventDefault();
-                var lang = event.target.getAttribute('data-lang');
-                localStorage.setItem('selectedLanguage', lang);
-                loadLanguage(lang);
-                document.getElementById('language-dialog').style.display = 'none';
-            });
-        });
-
         document.getElementById('play-button').addEventListener('click', function() {
             window.location.href = 'login.html';
-        });
-
-        function loadLanguage(lang) {
-            var messages = {
-                en: { welcome: 'Welcome to PositiveBip' },
-                es: { welcome: 'Bienvenido a PositiveBip' },
-                fr: { welcome: 'Bienvenue à PositiveBip' }
-                // Add more translations as needed
-            };
-
-            if (messages[lang]) {
-                document.getElementById('welcome-message').textContent = messages[lang].welcome;
-            } else {
-                document.getElementById('welcome-message').textContent = messages['en'].welcome;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
-            loadLanguage(selectedLanguage);
         });
     </script>
 </body>
