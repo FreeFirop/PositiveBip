@@ -8,14 +8,17 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: black;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            height: 100vh;
         }
 
         header {
             width: 100%;
             display: flex;
+            justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
             background-color: #333;
@@ -23,58 +26,81 @@
         }
 
         .header-left {
-            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-left img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .header-center {
+            text-align: center;
+            flex-grow: 1;
         }
 
         main {
             flex: 1;
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         textarea {
-            flex: 1;
-            width: 100%;
-            border: none;
-            padding: 20px;
-            font-family: monospace;
-            font-size: 1em;
+            width: 80%;
+            height: 300px;
+            margin: 20px 0;
         }
 
         button {
             padding: 10px 20px;
             border: none;
+            border-radius: 5px;
             background-color: blue;
             color: white;
             cursor: pointer;
         }
 
-        iframe {
-            flex: 1;
-            width: 100%;
-            border: none;
+        #output {
+            width: 80%;
+            height: 300px;
+            background-color: white;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+            overflow: auto;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-left">HTML Editor</div>
+        <div class="header-left">
+            <img src="rishaply-icon.png" alt="Rishaply Icon">
+            <span>RISHAPLY</span>
+        </div>
+        <div class="header-center">
+            <span>HTML Editor</span>
+        </div>
     </header>
 
     <main>
         <textarea id="html-code" placeholder="Type your HTML code here..."></textarea>
-        <button onclick="runCode()">Run</button>
-        <iframe id="output"></iframe>
+        <button id="run-btn">Run</button>
+        <div id="output"></div>
     </main>
 
     <script>
-        function runCode() {
-            const code = document.getElementById('html-code').value;
-            const iframe = document.getElementById('output');
-            iframe.contentWindow.document.open();
-            iframe.contentWindow.document.write(code);
-            iframe.contentWindow.document.close();
-        }
+        document.getElementById('run-btn').addEventListener('click', function() {
+            var code = document.getElementById('html-code').value;
+            var output = document.getElementById('output');
+            if (code.trim().startsWith('<') && code.trim().endsWith('>')) {
+                output.innerHTML = code;
+            } else {
+                output.innerHTML = 'Please enter valid HTML code.';
+            }
+        });
     </script>
 </body>
 </html>
