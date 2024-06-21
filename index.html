@@ -10,91 +10,87 @@
             font-family: Arial, sans-serif;
             background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF);
             color: blue;
-            text-align: center;
             height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-        }
-
-        .header-left {
-            flex: 1;
-            text-align: left;
-        }
-
-        .header-center {
-            flex: 1;
-            text-align: center;
-        }
-
-        .header-right {
-            flex: 1;
-            text-align: right;
-        }
-
-        .header-right img {
-            cursor: pointer;
-        }
-
-        main {
-            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
         }
 
-        footer {
+        header {
+            width: 100%;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid #ddd;
+            position: fixed;
+            top: 0;
+            color: blue;
+        }
+
+        .header-left {
+            text-align: left;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .header-right img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
         }
 
         .dialog {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            border: 1px solid #ddd;
-            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
         }
 
         .dialog-content {
-            text-align: left;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            position: relative;
+            color: blue;
         }
 
         .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
             cursor: pointer;
-            float: right;
             font-size: 20px;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            margin: 10px 0;
-        }
-
-        ul li a {
-            text-decoration: none;
             color: blue;
+        }
+
+        .footer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-top: 1px solid #ddd;
+            position: fixed;
+            bottom: 0;
+            color: blue;
+        }
+
+        .footer-left img {
+            width: 24px;
+            height: 24px;
             cursor: pointer;
         }
     </style>
@@ -102,41 +98,62 @@
 <body>
     <header>
         <div class="header-left">Rishaply</div>
-        <div class="header-center" id="welcome-message">Welcome to PositiveBip</div>
         <div class="header-right">
             <img src="globe-icon.png" alt="Language Selector" id="language-icon">
         </div>
     </header>
+
     <main>
-        <button id="play-button">Play</button>
+        <div class="content">
+            <h1>Welcome to PositiveBip</h1>
+        </div>
     </main>
-    <footer></footer>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <img src="play-button-icon.png" alt="Play Button" id="play-button">
+        </div>
+    </footer>
 
     <div id="language-dialog" class="dialog">
         <div class="dialog-content">
             <span class="close-btn" id="close-btn">&times;</span>
             <h2>Select Language</h2>
             <ul>
-                <li><a href="#">English</a></li>
-                <li><a href="#">Spanish</a></li>
-                <li><a href="#">French</a></li>
+                <li><a href="?lang=en">English</a></li>
+                <li><a href="?lang=es">Spanish</a></li>
+                <li><a href="?lang=fr">French</a></li>
                 <!-- Add more languages as needed -->
             </ul>
         </div>
     </div>
 
     <script>
-        document.getElementById('language-icon').addEventListener('click', function() {
-            document.getElementById('language-dialog').style.display = 'block';
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const languageIcon = document.getElementById('language-icon');
+            const languageDialog = document.getElementById('language-dialog');
+            const closeBtn = document.getElementById('close-btn');
+            const playButton = document.getElementById('play-button');
 
-        document.getElementById('close-btn').addEventListener('click', function() {
-            document.getElementById('language-dialog').style.display = 'none';
-        });
+            languageIcon.addEventListener('click', () => {
+                languageDialog.style.display = 'flex';
+            });
 
-        document.getElementById('play-button').addEventListener('click', function() {
-            window.location.href = 'login.html';
+            closeBtn.addEventListener('click', () => {
+                languageDialog.style.display = 'none';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target == languageDialog) {
+                    languageDialog.style.display = 'none';
+                }
+            });
+
+            playButton.addEventListener('click', () => {
+                window.location.href = 'login.html';
+            });
         });
     </script>
 </body>
-</html>
+            </html>
+            
