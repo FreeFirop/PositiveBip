@@ -94,7 +94,7 @@
 
     <main class="content">
         <h1>LOGIN</h1>
-        <form>
+        <form onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
             <input type="email" placeholder="Email" required>
             <input type="password" placeholder="Password" required>
             <button type="submit">Login</button>
