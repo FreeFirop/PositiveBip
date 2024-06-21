@@ -8,8 +8,8 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: black;
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); /* Rainbow background */
+            color: white;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -41,10 +41,6 @@
             flex-grow: 1;
         }
 
-        .header-center span {
-            font-size: 1.2em;
-        }
-
         main {
             flex: 1;
             display: flex;
@@ -55,14 +51,12 @@
 
         .center-content {
             text-align: center;
+            margin-bottom: 20px;
         }
 
-        .center-content a {
-            color: blue;
-            text-decoration: none;
-            font-size: 1.5em;
-            margin-top: 20px;
-            display: inline-block;
+        .editor-container {
+            border: 2px solid blue; /* Blue border */
+            padding: 10px;
         }
     </style>
 </head>
@@ -73,13 +67,17 @@
             <span>RISHAPLY</span>
         </div>
         <div class="header-center">
-            <span>Welcome to Dashboard</span>
+            <span>WELCOME TO POSITIVEBIP HTML EDITOR</span> <!-- Updated text -->
         </div>
     </header>
 
     <main>
         <div class="center-content">
-            <a href="html-editor.html">HTML Editor</a>
+            <div class="editor-container">
+                <h2>HTML Editor</h2>
+                <p>Start coding your HTML here:</p>
+                <a href="html-editor.html">Go to HTML Editor</a>
+            </div>
         </div>
     </main>
 </body>
