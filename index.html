@@ -24,19 +24,12 @@
             color: white;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
+        .header-left, .header-center, .header-right {
+            flex: 1;
         }
 
         .header-center {
             text-align: center;
-            flex-grow: 1;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
         }
 
         main {
@@ -70,6 +63,12 @@
             margin-right: 10px;
             width: 20px;
             height: 20px;
+        }
+
+        #language-icon {
+            width: 24px; /* Adjust the size of the language icon */
+            height: 24px;
+            border: none; /* Remove the black border */
         }
 
         #language-dialog {
@@ -108,8 +107,8 @@
     </main>
     <footer>
         <button class="play-button" id="play-btn">
-            <img src="play-button-icon.png" alt="Play Icon"> Play
-        </button> <!-- Stays on the left side -->
+            <img src="play-icon.png" alt="Play Icon"> Play
+        </button>
     </footer>
     <div id="language-dialog" class="dialog">
         <div class="dialog-content">
@@ -137,4 +136,5 @@
         });
     </script>
 </body>
-</html>
+    </html>
+    
