@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Output - Rishaply</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-left img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .header-center {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        .output-container {
+            width: 80%;
+            height: 400px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+            overflow: auto;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <img src="rishaply-icon.png" alt="Rishaply Icon">
+            <span>RISHAPLY</span>
+        </div>
+        <div class="header-center">
+            <span>HTML Output</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="output-container" id="output"></div>
+        <button id="back-btn">Back to Editor</button>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var code = localStorage.getItem('htmlCode');
+            document.getElementById('output').innerHTML = code;
+        });
+
+        document.getElementById('back-btn').addEventListener('click', function() {
+            window.location.href = 'html-editor.html';
+        });
+    </script>
+</body>
+</html>
