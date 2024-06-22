@@ -47,11 +47,12 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
         textarea {
             width: 80%;
-            height: 300px;
+            height: 400px; /* Increased height */
             margin: 20px 0;
         }
 
@@ -62,15 +63,6 @@
             background-color: blue;
             color: white;
             cursor: pointer;
-        }
-
-        #output {
-            width: 80%;
-            height: 300px;
-            background-color: white;
-            border: 1px solid #ddd;
-            margin-top: 20px;
-            overflow: auto;
         }
     </style>
 </head>
@@ -88,18 +80,13 @@
     <main>
         <textarea id="html-code" placeholder="Type your HTML code here..."></textarea>
         <button id="run-btn">Run</button>
-        <div id="output"></div>
     </main>
 
     <script>
         document.getElementById('run-btn').addEventListener('click', function() {
             var code = document.getElementById('html-code').value;
-            var output = document.getElementById('output');
-            if (code.trim().startsWith('<') && code.trim().endsWith('>')) {
-                output.innerHTML = code;
-            } else {
-                output.innerHTML = 'Please enter valid HTML code.';
-            }
+            localStorage.setItem('htmlCode', code); // Store the code in localStorage
+            window.location.href = 'output.html'; // Navigate to output.html
         });
     </script>
 </body>
