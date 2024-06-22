@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Login</title>
     <style>
         body {
             margin: 0;
@@ -47,52 +47,55 @@
             color: white;
             cursor: pointer;
         }
+
+        .container button.logout-button {
+            background-color: red;
+        }
     </style>
 </head>
 <body>
-    <div class="container" id="verify-container">
-        <h1>Verify Email</h1>
-        <p>An OTP has been sent to your email. Please enter the OTP to complete registration.</p>
-        <input type="text" id="otp" placeholder="Enter OTP">
-        <button onclick="verifyOTP()">Verify</button>
+    <div class="container" id="login-container">
+        <h1>Login</h1>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Password">
+        <button onclick="login()">Login</button>
     </div>
 
     <div class="container" id="dashboard-container" style="display: none;">
         <h1>Dashboard</h1>
-        <p>Congratulations! You have successfully registered and verified your email.</p>
-        <button onclick="logout()">Logout</button>
+        <p>Welcome to PositiveBip HTML Editor</p>
+        <button class="logout-button" onclick="logout()">Logout</button>
     </div>
 
     <script>
-        function verifyOTP() {
-            const otpInput = document.getElementById('otp').value;
-            const storedOtp = localStorage.getItem('otp');
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
 
-            if (otpInput === storedOtp) {
-                alert('Email verified successfully!');
-                document.getElementById('verify-container').style.display = 'none';
+            const storedEmail = localStorage.getItem('email');
+            const storedPassword = localStorage.getItem('password');
+
+            if (email === storedEmail && password === storedPassword) {
+                document.getElementById('login-container').style.display = 'none';
                 document.getElementById('dashboard-container').style.display = 'block';
             } else {
-                alert('Invalid OTP. Please try again.');
+                alert('Invalid email or password.');
             }
         }
 
         function logout() {
-            // Implement logout functionality here (e.g., clearing localStorage)
-            localStorage.clear();
-            // Redirect the user to the login page
-            window.location.href = 'login.html';
+            // Clear stored email and password
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
+            document.getElementById('dashboard-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
         }
 
-        // Function to generate a random 6-digit OTP
-        function generateOTP() {
-            return Math.floor(100000 + Math.random() * 900000);
+        // Check if user is already logged in
+        if (localStorage.getItem('email') && localStorage.getItem('password')) {
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('dashboard-container').style.display = 'block';
         }
-
-        // Automatically generate OTP and store it in localStorage
-        const otp = generateOTP();
-        localStorage.setItem('otp', otp);
-        console.log('OTP:', otp); // For testing purposes, log the OTP to the console
     </script>
 </body>
 </html>
