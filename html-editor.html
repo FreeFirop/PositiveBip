@@ -3,42 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Editor - Rishaply</title>
+    <title>HTML Editor</title>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-            color: green; /* Pure green color */
-            height: 100vh;
+            color: white;
             display: flex;
             flex-direction: column;
+            height: 100vh;
         }
 
         header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             padding: 10px 20px;
             background-color: #333;
             color: white;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .header-left img {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
-        }
-
-        .header-center {
-            text-align: center;
-            flex-grow: 1;
         }
 
         main {
@@ -47,57 +27,72 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+        }
+
+        .editor-container {
+            width: 80%;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
         }
 
         textarea {
-            width: 80%;
-            height: 400px; /* Increased height */
-            margin: 20px 0;
+            flex: 1;
+            width: 100%;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            resize: none;
         }
 
-        button {
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .run-button, .back-button {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .run-button {
             background-color: blue;
             color: white;
-            cursor: pointer;
+        }
+
+        .back-button {
+            background-color: gray;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-left">
-            <img src="rishaply-icon.png" alt="Rishaply Icon">
-            <span>RISHAPLY</span>
-        </div>
-        <div class="header-center">
-            <span>HTML Editor</span>
-        </div>
-    </header>
-
+    <header>HTML Editor</header>
     <main>
-        <textarea id="html-code" placeholder="Type your HTML code here..."></textarea>
-        <button id="run-btn">Run</button>
+        <div class="editor-container">
+            <textarea id="html-input" placeholder="Type your HTML code here..."></textarea>
+            <div class="buttons">
+                <button class="run-button" onclick="runCode()">Run</button>
+                <button class="back-button" onclick="goBack()">Back</button>
+            </div>
+        </div>
     </main>
 
     <script>
-        function isValidHTML(str) {
-            var doc = document.createElement('div');
-            doc.innerHTML = str;
-            return Array.from(doc.childNodes).some(node => node.nodeType === 1);
+        function runCode() {
+            const code = document.getElementById('html-input').value;
+            localStorage.setItem('htmlCode', code);
+            window.location.href = 'output.html';
         }
 
-        document.getElementById('run-btn').addEventListener('click', function() {
-            var code = document.getElementById('html-code').value;
-            if (isValidHTML(code)) {
-                localStorage.setItem('htmlCode', code); // Store the code in localStorage
-                window.location.href = 'output.html'; // Navigate to output.html
-            } else {
-                alert('Please enter valid HTML code.');
-            }
-        });
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </body>
 </html>
