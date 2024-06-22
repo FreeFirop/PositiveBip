@@ -8,113 +8,99 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF);
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
             color: blue;
+            display: flex;
+            flex-direction: column;
             height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-center {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        main {
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
         }
 
-        header {
-            width: 100%;
+        footer {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: flex-end; /* Move to right */
             padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-bottom: 1px solid #ddd;
-            position: fixed;
-            top: 0;
-            color: blue;
+            background-color: #333;
+            color: white;
         }
 
-        .header-left {
-            text-align: left;
-        }
-
-        .header-right {
-            text-align: right;
-        }
-
-        .header-right img {
-            width: 24px;
-            height: 24px;
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: blue;
+            color: white;
             cursor: pointer;
         }
 
-        .dialog {
+        #language-dialog {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .dialog-content {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
             text-align: center;
-            position: relative;
-            color: blue;
         }
 
         .close-btn {
+            cursor: pointer;
             position: absolute;
             top: 10px;
             right: 10px;
-            cursor: pointer;
-            font-size: 20px;
-            color: blue;
-        }
-
-        .footer {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-top: 1px solid #ddd;
-            position: fixed;
-            bottom: 0;
-            color: blue;
-        }
-
-        .footer-left img {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <header>
         <div class="header-left">Rishaply</div>
+        <div class="header-center">Welcome to PositiveBip</div>
         <div class="header-right">
             <img src="globe-icon.png" alt="Language Selector" id="language-icon">
         </div>
     </header>
-
     <main>
-        <div class="content">
-            <h1>Welcome to PositiveBip</h1>
-        </div>
+        <!-- Main content can go here -->
     </main>
-
-    <footer class="footer">
-        <div class="footer-left">
-            <img src="play-button-icon.png" alt="Play Button" id="play-button">
-        </div>
+    <footer>
+        <button id="play-btn">Play</button> <!-- Moved to the right side -->
     </footer>
-
     <div id="language-dialog" class="dialog">
         <div class="dialog-content">
             <span class="close-btn" id="close-btn">&times;</span>
@@ -127,33 +113,18 @@
             </ul>
         </div>
     </div>
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const languageIcon = document.getElementById('language-icon');
-            const languageDialog = document.getElementById('language-dialog');
-            const closeBtn = document.getElementById('close-btn');
-            const playButton = document.getElementById('play-button');
+        document.getElementById('language-icon').addEventListener('click', function() {
+            document.getElementById('language-dialog').style.display = 'block';
+        });
 
-            languageIcon.addEventListener('click', () => {
-                languageDialog.style.display = 'flex';
-            });
+        document.getElementById('close-btn').addEventListener('click', function() {
+            document.getElementById('language-dialog').style.display = 'none';
+        });
 
-            closeBtn.addEventListener('click', () => {
-                languageDialog.style.display = 'none';
-            });
-
-            window.addEventListener('click', (event) => {
-                if (event.target == languageDialog) {
-                    languageDialog.style.display = 'none';
-                }
-            });
-
-            playButton.addEventListener('click', () => {
-                window.location.href = 'login.html';
-            });
+        document.getElementById('play-btn').addEventListener('click', function() {
+            window.location.href = 'login.html';
         });
     </script>
 </body>
-            </html>
-            
+</html>
