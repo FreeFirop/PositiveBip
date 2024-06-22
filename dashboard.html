@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Rishaply</title>
+    <title>Dashboard</title>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(45deg, red, orange, yellow, pink, green, blue, indigo, violet); /* Rainbow background */
-            color: white;
-            height: 100vh;
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            color: blue;
             display: flex;
             flex-direction: column;
+            height: 100vh;
         }
 
         header {
-            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -25,20 +24,12 @@
             color: white;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .header-left img {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
+        .header-left, .header-center, .header-right {
+            flex: 1;
         }
 
         .header-center {
             text-align: center;
-            flex-grow: 1;
         }
 
         main {
@@ -49,36 +40,67 @@
             align-items: center;
         }
 
-        .center-content {
-            text-align: center;
-            margin-bottom: 20px;
+        footer {
+            display: flex;
+            justify-content: flex-end; /* Move to the right */
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
         }
 
-        .editor-container {
-            border: 2px solid blue; /* Blue border */
-            padding: 10px;
+        .logout-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+        }
+
+        .header-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .html-editor-text {
+            border: 2px solid blue;
+            padding: 5px 10px;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <header>
         <div class="header-left">
-            <img src="rishaply-icon.png" alt="Rishaply Icon">
-            <span>RISHAPLY</span>
+            <img src="rishaply-icon.png" alt="Rishaply Icon" style="width: 24px; height: 24px; margin-right: 10px;">
+            Rishaply
         </div>
         <div class="header-center">
-            <span>WELCOME TO POSITIVEBIP</span> <!-- Updated text -->
+            <div>WELCOME TO POSITIVEBIP HTML EDITOR</div>
+            <div class="html-editor-text">HTML Editor</div>
+        </div>
+        <div class="header-right">
+            <!-- Placeholder for future content -->
         </div>
     </header>
-
     <main>
-        <div class="center-content">
-            <h2>HTML Editor</h2>
-            <p>Welcome to PositiveBip HTML Editor. Start coding your HTML here:</p>
-            <div class="editor-container">
-                <a href="html-editor.html">Go to HTML Editor</a>
-            </div>
-        </div>
+        <!-- Main content can go here -->
     </main>
+    <footer>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </footer>
+    <script>
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
 </body>
 </html>
