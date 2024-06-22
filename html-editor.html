@@ -83,10 +83,20 @@
     </main>
 
     <script>
+        function isValidHTML(str) {
+            var doc = document.createElement('div');
+            doc.innerHTML = str;
+            return Array.from(doc.childNodes).some(node => node.nodeType === 1);
+        }
+
         document.getElementById('run-btn').addEventListener('click', function() {
             var code = document.getElementById('html-code').value;
-            localStorage.setItem('htmlCode', code); // Store the code in localStorage
-            window.location.href = 'output.html'; // Navigate to output.html
+            if (isValidHTML(code)) {
+                localStorage.setItem('htmlCode', code); // Store the code in localStorage
+                window.location.href = 'output.html'; // Navigate to output.html
+            } else {
+                alert('Please enter valid HTML code.');
+            }
         });
     </script>
 </body>
