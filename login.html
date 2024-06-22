@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Dashboard</title>
     <style>
         body {
             margin: 0;
@@ -50,58 +50,49 @@
     </style>
 </head>
 <body>
-    <div class="container" id="register-container">
-        <h1>Register</h1>
-        <input type="email" id="register-email" placeholder="Email">
-        <input type="password" id="register-password" placeholder="Password">
-        <button onclick="register()">Register</button>
-    </div>
-
-    <div class="container" id="verify-container" style="display: none;">
+    <div class="container" id="verify-container">
         <h1>Verify Email</h1>
         <p>An OTP has been sent to your email. Please enter the OTP to complete registration.</p>
         <input type="text" id="otp" placeholder="Enter OTP">
         <button onclick="verifyOTP()">Verify</button>
     </div>
 
+    <div class="container" id="dashboard-container" style="display: none;">
+        <h1>Dashboard</h1>
+        <p>Congratulations! You have successfully registered and verified your email.</p>
+        <button onclick="logout()">Logout</button>
+    </div>
+
     <script>
-        function register() {
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-
-            // Code to generate and send OTP to the email
-            const otp = generateOTP(); // Replace this with your OTP generation logic
-            console.log('OTP:', otp); // For testing purposes, log the OTP to the console
-
-            // Save email and password to localStorage (for simplicity, not recommended in real-world scenarios)
-            localStorage.setItem('email', email);
-            localStorage.setItem('password', password);
-
-            // Redirect to the email verification section
-            document.getElementById('register-container').style.display = 'none';
-            document.getElementById('verify-container').style.display = 'block';
-        }
-
         function verifyOTP() {
             const otpInput = document.getElementById('otp').value;
             const storedOtp = localStorage.getItem('otp');
 
             if (otpInput === storedOtp) {
                 alert('Email verified successfully!');
-                // You can redirect the user to the dashboard or any other page
-                // For simplicity, redirecting to the login page
-                window.location.href = 'login.html';
+                document.getElementById('verify-container').style.display = 'none';
+                document.getElementById('dashboard-container').style.display = 'block';
             } else {
                 alert('Invalid OTP. Please try again.');
             }
         }
 
-        function generateOTP() {
-            // Generate a random 6-digit OTP
-            const otp = Math.floor(100000 + Math.random() * 900000);
-            localStorage.setItem('otp', otp);
-            return otp;
+        function logout() {
+            // Implement logout functionality here (e.g., clearing localStorage)
+            localStorage.clear();
+            // Redirect the user to the login page
+            window.location.href = 'login.html';
         }
+
+        // Function to generate a random 6-digit OTP
+        function generateOTP() {
+            return Math.floor(100000 + Math.random() * 900000);
+        }
+
+        // Automatically generate OTP and store it in localStorage
+        const otp = generateOTP();
+        localStorage.setItem('otp', otp);
+        console.log('OTP:', otp); // For testing purposes, log the OTP to the console
     </script>
 </body>
 </html>
