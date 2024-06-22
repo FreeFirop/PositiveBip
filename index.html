@@ -8,11 +8,12 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            background: linear-gradient(45deg, #FFB3BA, #FFDFBA, #FFFFBA, #BAFFC9, #BAE1FF);
             color: blue;
+            text-align: center;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            height: 100vh;
         }
 
         header {
@@ -20,23 +21,27 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.8);
             color: white;
         }
 
         .header-left {
-            display: flex;
-            align-items: center;
+            flex: 1;
+            text-align: left;
         }
 
         .header-center {
+            flex: 1;
             text-align: center;
-            flex-grow: 1;
         }
 
         .header-right {
-            display: flex;
-            align-items: center;
+            flex: 1;
+            text-align: right;
+        }
+
+        .header-right img {
+            cursor: pointer;
         }
 
         main {
@@ -49,70 +54,77 @@
 
         footer {
             display: flex;
-            justify-content: flex-end; /* Move to right */
+            justify-content: flex-start;
+            align-items: center;
             padding: 10px 20px;
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.8);
             color: white;
         }
 
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: blue;
-            color: white;
-            cursor: pointer;
-        }
-
-        #language-dialog {
+        .dialog {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: white;
+            background: white;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #ddd;
+            z-index: 1000;
         }
 
         .dialog-content {
-            text-align: center;
+            text-align: left;
         }
 
         .close-btn {
             cursor: pointer;
-            position: absolute;
-            top: 10px;
-            right: 10px;
+            float: right;
+            font-size: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: blue;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <header>
         <div class="header-left">Rishaply</div>
-        <div class="header-center">Welcome to PositiveBip</div>
+        <div class="header-center" id="welcome-message">Welcome to PositiveBip</div>
         <div class="header-right">
             <img src="globe-icon.png" alt="Language Selector" id="language-icon">
         </div>
     </header>
     <main>
-        <!-- Main content can go here -->
+        <button id="play-button">Play</button>
     </main>
-    <footer>
-        <button id="play-btn">Play</button> <!-- Moved to the right side -->
-    </footer>
+    <footer></footer>
+
     <div id="language-dialog" class="dialog">
         <div class="dialog-content">
             <span class="close-btn" id="close-btn">&times;</span>
             <h2>Select Language</h2>
             <ul>
-                <li><a href="?lang=en">English</a></li>
-                <li><a href="?lang=es">Spanish</a></li>
-                <li><a href="?lang=fr">French</a></li>
+                <li><a href="#">English</a></li>
+                <li><a href="#">Spanish</a></li>
+                <li><a href="#">French</a></li>
                 <!-- Add more languages as needed -->
             </ul>
         </div>
     </div>
+
     <script>
         document.getElementById('language-icon').addEventListener('click', function() {
             document.getElementById('language-dialog').style.display = 'block';
@@ -122,7 +134,7 @@
             document.getElementById('language-dialog').style.display = 'none';
         });
 
-        document.getElementById('play-btn').addEventListener('click', function() {
+        document.getElementById('play-button').addEventListener('click', function() {
             window.location.href = 'login.html';
         });
     </script>
