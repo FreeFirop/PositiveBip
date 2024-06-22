@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
     <style>
         body {
             margin: 0;
@@ -11,101 +11,96 @@
             background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
             color: white;
             display: flex;
-            flex-direction: column;
-            height: 100vh;
             justify-content: center;
             align-items: center;
+            height: 100vh;
         }
+
         .container {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
-            border-radius: 5px;
+            border-radius: 10px;
             text-align: center;
         }
+
+        .container h1 {
+            margin-bottom: 20px;
+        }
+
         .container input {
-            margin: 10px;
-            padding: 10px;
+            display: block;
             width: 80%;
-            border-radius: 5px;
-            border: none;
-        }
-        .container button {
-            margin: 10px;
+            margin: 10px auto;
             padding: 10px;
-            width: 85%;
-            border-radius: 5px;
             border: none;
-            cursor: pointer;
+            border-radius: 5px;
         }
-        .container a {
-            color: lightblue;
+
+        .container button {
+            display: block;
+            width: 50%;
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: blue;
+            color: white;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Login</h1>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button onclick="login()">Login</button>
-        <br>
-        <a onclick="showRegister()">Register</a>
+    <div class="container" id="register-container">
+        <h1>Register</h1>
+        <input type="email" id="register-email" placeholder="Email">
+        <input type="password" id="register-password" placeholder="Password">
+        <button onclick="register()">Register</button>
     </div>
 
-    <div class="container" id="register-container" style="display: none;">
-        <h1>Register</h1>
-        <input type="email" id="reg-email" placeholder="Email" required>
-        <input type="password" id="reg-password" placeholder="Password" required>
-        <button onclick="register()">Register</button>
-        <br>
-        <a onclick="showLogin()">Back to Login</a>
+    <div class="container" id="verify-container" style="display: none;">
+        <h1>Verify Email</h1>
+        <p>An OTP has been sent to your email. Please enter the OTP to complete registration.</p>
+        <input type="text" id="otp" placeholder="Enter OTP">
+        <button onclick="verifyOTP()">Verify</button>
     </div>
 
     <script>
-        function showRegister() {
-            document.querySelector('.container').style.display = 'none';
-            document.getElementById('register-container').style.display = 'block';
-        }
-
-        function showLogin() {
-            document.getElementById('register-container').style.display = 'none';
-            document.querySelector('.container').style.display = 'block';
-        }
-
         function register() {
-            const email = document.getElementById('reg-email').value;
-            const password = document.getElementById('reg-password').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
 
-            if (email && password) {
-                localStorage.setItem('userEmail', email);
-                localStorage.setItem('userPassword', password);
-                alert('Registration successful!');
-                showLogin();
+            // Code to generate and send OTP to the email
+            const otp = generateOTP(); // Replace this with your OTP generation logic
+            console.log('OTP:', otp); // For testing purposes, log the OTP to the console
+
+            // Save email and password to localStorage (for simplicity, not recommended in real-world scenarios)
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+
+            // Redirect to the email verification section
+            document.getElementById('register-container').style.display = 'none';
+            document.getElementById('verify-container').style.display = 'block';
+        }
+
+        function verifyOTP() {
+            const otpInput = document.getElementById('otp').value;
+            const storedOtp = localStorage.getItem('otp');
+
+            if (otpInput === storedOtp) {
+                alert('Email verified successfully!');
+                // You can redirect the user to the dashboard or any other page
+                // For simplicity, redirecting to the login page
+                window.location.href = 'login.html';
             } else {
-                alert('Please fill in all fields.');
+                alert('Invalid OTP. Please try again.');
             }
         }
 
-        function login() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            const storedEmail = localStorage.getItem('userEmail');
-            const storedPassword = localStorage.getItem('userPassword');
-
-            if (email === storedEmail && password === storedPassword) {
-                localStorage.setItem('isLoggedIn', 'true');
-                window.location.href = 'dashboard.html';
-            } else {
-                alert('Invalid email or password.');
-            }
-        }
-
-        window.onload = function() {
-            if (localStorage.getItem('isLoggedIn') === 'true') {
-                window.location.href = 'dashboard.html';
-            }
+        function generateOTP() {
+            // Generate a random 6-digit OTP
+            const otp = Math.floor(100000 + Math.random() * 900000);
+            localStorage.setItem('otp', otp);
+            return otp;
         }
     </script>
 </body>
