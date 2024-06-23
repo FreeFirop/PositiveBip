@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .container h1 {
+            margin-bottom: 20px;
+        }
+
+        .container input {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .container button {
+            display: block;
+            width: 50%;
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h1>Login</h1>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <script>
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            const storedEmail = localStorage.getItem('email');
+            const storedPassword = localStorage.getItem('password');
+
+            if (email === storedEmail && password === storedPassword) {
+                // Redirect to the dashboard page upon successful login
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Invalid email or password.');
+            }
+        }
+    </script>
+</body>
+</html>
