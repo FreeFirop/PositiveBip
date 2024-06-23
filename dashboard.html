@@ -63,5 +63,13 @@
     <footer>
         <img src="play-button.png" alt="Play Button">
     </footer>
+
+    <script>
+        // Check if the user is not logged in
+        if (!localStorage.getItem('email') || !localStorage.getItem('password')) {
+            // Redirect the user to the login page
+            window.location.href = 'login.html';
+        }
+    </script>
 </body>
 </html>
