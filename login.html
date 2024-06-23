@@ -63,10 +63,7 @@
             const password = document.getElementById('login-password').value;
 
             const storedEmail = localStorage.getItem('email');
-            const storedPassword = localStorage.getItem('password');
-
-            if (email === storedEmail && password === storedPassword) {
-                // Redirect to the dashboard page upon successful login
+            const storedPassword = localStorage.getItem('password')
                 window.location.href = 'dashboard.html';
             } else {
                 alert('Invalid email or password.');
