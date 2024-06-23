@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: powderblue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        footer {
+            width: 100%;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .rainbow-text {
+            background-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div></div>
+        <div>Welcome to PositiveBip</div>
+        <div><a href="login.html">Logout</a></div>
+    </header>
+
+    <div class="container">
+        <h1 class="rainbow-text">Welcome to PositiveBip</h1>
+    </div>
+
+    <footer>
+        <img src="play-button.png" alt="Play Button">
+    </footer>
+</body>
+</html>
